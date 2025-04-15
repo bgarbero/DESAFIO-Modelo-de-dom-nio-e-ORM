@@ -20,8 +20,9 @@ public class Bloco {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant fim;
 
-
-    private Set<Atividade> atividades = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "atividade_id")//FK na tb_bloco
+    private Atividade atividade;
 
     public Bloco() {
     }

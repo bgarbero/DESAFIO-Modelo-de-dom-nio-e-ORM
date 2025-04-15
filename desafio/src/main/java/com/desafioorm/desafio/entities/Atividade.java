@@ -17,13 +17,17 @@ public class Atividade {
     private Double preco;
 
     @ManyToOne
-    private Set<Categoria> categoria = new HashSet<>();
+    @JoinColumn(name = "categoria_id") //coluna FK na tabela tb_atividade
+    private Categoria categoria;
 
     @ManyToMany
     @JoinTable(name = "tb_participante_atividade",
-            joinColumns = @JoinColumn(name = "participante_id"),
-            inverseJoinColumns = @JoinColumn(name = "atividade_id"))
+            joinColumns = @JoinColumn(name = "atividade_id"),//classe origem
+            inverseJoinColumns = @JoinColumn(name = "participante_id"))
     private Set<Participante> participantes = new HashSet<>();
+
+    @OneToMany(mappedBy = "atividade")
+    private Set<Bloco> blocos = new HashSet<>();
 
     public Atividade() {
     }
